@@ -19,7 +19,6 @@ php artisan route:list --path=products -r
 
 Route::get('/', function () {
     return redirect("categories");
-    return view('welcome');
 });
 
 Route::get('/products', function() {
