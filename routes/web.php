@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\ProductResource;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +25,8 @@ Route::get('/', function () {
 });
 
 Route::get('/products', function() {
-    return "<h1>All Products</h1>";
+    $products = Product::orderBy('name')->get();
+    return ProductResource::collection($products);
 });
 
 Route::get('/products/create', function() {

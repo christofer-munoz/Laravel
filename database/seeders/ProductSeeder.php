@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use DB;
+use Faker\Factory as Faker; //se importa la librería de faker
 
 class ProductSeeder extends Seeder
 {
@@ -14,11 +15,13 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();   //creamos la instancia de faker
+        $products = [];
+        
         foreach (range(1, 20) as $index) {
             $products[] = [
                 'name' => "Product $index",
-                'price' => rand(1,10) * 100,
-                //'category_id' => rand(3,5),
+                'price' => $faker->randomDigitNot(0) * 100, //asignamos algun valor con faker, php artisan migrate:fresh --sed
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
