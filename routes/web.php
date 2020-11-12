@@ -1,9 +1,11 @@
 <?php
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\ProductResource;
-
+use App\Http\Resources\CategoryResource;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,29 +16,25 @@ use App\Http\Resources\ProductResource;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-php artisan route:list
-php artisan route:list -c
-php artisan route:list --path=products
-php artisan route:list --path=products -r
+| php artisan route:list
 */
 
 Route::get('/', function () {
-    return redirect("categories");
+    //return redirect("categories");
 });
 
-Route::get('/products', function() {
-    $products = Product::orderBy('name')->get();
-    return ProductResource::collection($products);
+Route::get('/products', 'ProductController@index');
+    //$products = Product::orderBy('name')->get();
+    //return ProductResource::collection($products);
+Route::post('products/', 'ProductController@store');
+Route::get('/products/{product}', 'ProductController@show');
+/*
+Route::get('/products/{product}', function(Product $product) {
+    //$product = Product::findOrFail($product);
+    return new ProductResource($product);
 });
-
-Route::get('/products/create', function() {
-    return "<h1>Add new product</h1>";
-});
-
-Route::get('/products/create/{product}', function($product) {
-    return "<h1>Product {$product}</h1>";
-});
-
+*/
 Route::get('/categories', function() {
-    return response()->json(["Category 1", "Category 2"]);
+    $categories = Category::orderBy('name')->get();
+    return CategoryResource::collection($categories);
 });

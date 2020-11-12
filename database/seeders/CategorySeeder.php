@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use DB;
-use Faker\Factory as Faker;
+use Faker\Factory as Faker; //importamos libreria faker
 
 class CategorySeeder extends Seeder
 {
@@ -20,7 +20,7 @@ class CategorySeeder extends Seeder
 
         foreach (range(1, 5) as $index) {
             $categories[] = [
-                'name' => $faker->text(20),
+                'name' => $faker->text(20), //
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
